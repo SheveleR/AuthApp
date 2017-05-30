@@ -15,7 +15,6 @@
 @property (nonatomic, strong) UITextField *txtPassword;
 @property (nonatomic, strong) UIButton *btnLogin;
 @property (nonatomic, strong) UIButton *btnRegister;
-@property (nonatomic, strong) UILabel *orLabel;
 
 - (void)showAlert:(NSString *) title withmessage:(NSString *) message;
 

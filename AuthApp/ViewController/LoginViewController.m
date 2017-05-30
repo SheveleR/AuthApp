@@ -12,17 +12,14 @@
 #import "WPSAlertController.h"
 
 @interface LoginViewController ()
-
+@property (nonatomic, strong) LoginPresenter *presenter;
 @end
 
 @implementation LoginViewController
 
-#define username @"admin"
-#define password @"admin"
-
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+    self.presenter = [[LoginPresenter alloc] initWithLoginViewController:self];
     self.view.backgroundColor = [UIColor colorWithRed:62/255.0 green:69/255.0 blue:76/255.0 alpha:1];
     [self createBackground];
     [self createUsernameTextField];
@@ -48,13 +45,15 @@
 - (void)createUsernameTextField {
     self.txtEmail = [[UITextField alloc] initWithFrame:CGRectMake(35, 80, 250, 30)];
     self.txtEmail.placeholder = @"e-mail";
+    [self.txtEmail addTarget:self action:@selector(textFieldDidChange:) forControlEvents:UIControlEventEditingChanged];
     [self.view addSubview:self.txtEmail];
 }
 
 - (void)createPasswordTextField {
     self.txtPassword = [[UITextField alloc] initWithFrame:CGRectMake(35, 125, 250, 30)];
     self.txtPassword.secureTextEntry = YES;
-    self.txtPassword.placeholder = @"password";
+    self.txtPassword.placeholder = @"Пароль";
+    [self.txtPassword addTarget:self action:@selector(textFieldDidChange:) forControlEvents:UIControlEventEditingChanged];
     [self.view addSubview:self.txtPassword];
 }
 
@@ -66,32 +65,30 @@
     [self.btnLogin setBackgroundImage:image forState:UIControlStateNormal];
     [self.btnLogin addTarget:self action:@selector(loginButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:self.btnLogin];
+    self.btnLogin.enabled = NO;
 }
 
 - (void)createRegisterButton {
     UIImage *image = [ImageFactory createImageWithPathForResource:@"register_button" ofType:@"png" inDirectory:@"images"];
     
-    self.btnLogin = [UIButton buttonWithType:UIButtonTypeCustom];
-    self.btnLogin.frame = CGRectMake(30, 230, 270, 47);
-    [self.btnLogin setBackgroundImage:image forState:UIControlStateNormal];
-    [self.btnLogin addTarget:self action:@selector(registrationButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
-    [self.view addSubview:self.btnLogin];
+    self.btnRegister = [UIButton buttonWithType:UIButtonTypeCustom];
+    self.btnRegister.frame = CGRectMake(30, 230, 270, 47);
+    [self.btnRegister setBackgroundImage:image forState:UIControlStateNormal];
+    [self.btnRegister addTarget:self action:@selector(registrationButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:self.btnRegister];
 }
 #pragma mark - userInteractions
-- (void)loginButtonClicked:(id)sender {
-      
-    LoginPresenter * loginPresenter = [[LoginPresenter alloc]init];
-    [loginPresenter loginButtonClicked:self withEmail:self.txtEmail.text andPassword: self.txtPassword.text];
+- (void) textFieldDidChange:(UITextField *) emailTxtField {
+    self.btnLogin.enabled = YES;
 }
-- (void)registrationButtonClicked:(id)sender {
-    LoginPresenter * loginPresenter = [[LoginPresenter alloc]init];
-    [loginPresenter registrationButtonClicked:self];
+- (void)loginButtonClicked:(id)sender {
+    [self.presenter loginWithEmail:self.txtEmail.text andPassword: self.txtPassword.text];
 }
 
-- (void)hideKeyboard {
-    [self.txtEmail resignFirstResponder];
-    [self.txtPassword resignFirstResponder];
+- (void)registrationButtonClicked:(id)sender {
+    [self.presenter registrationButtonClicked];
 }
+
 - (void)showAlert:(NSString *) title withmessage:(NSString *) message {
     WPSAlertController *alertController = [WPSAlertController alertControllerWithTitle:title message:message preferredStyle:UIAlertControllerStyleAlert];
     [alertController addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:nil]];

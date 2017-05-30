@@ -22,9 +22,7 @@
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
     
-    _navigationController = [[UINavigationController alloc] init]; //navigation controller is a property on
-    LoginViewController *loginVC = [[LoginViewController alloc] initWithNibName:nil bundle:nil];
-    [self.window addSubview:_navigationController.view];
+    LoginViewController *loginVC = [[LoginViewController alloc] init];
     [self.window setRootViewController:loginVC];
     
     return YES;

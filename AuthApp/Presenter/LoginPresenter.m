@@ -13,40 +13,44 @@
 #import "ModelLogin.h"
 
 @interface LoginPresenter ()
-
+@property (nonatomic, weak) LoginViewController *loginViewController;
+@property (nonatomic, strong) ModelLogin *modelLogin;
 @end
 
 @implementation LoginPresenter
 #define defaultEmail @"Admin"
 #define defaultPassword @"Admin"
-
-
-
--(void)loginButtonClicked:(UIViewController*) viewController withEmail:(NSString*) email andPassword:(NSString*) password {
-    LoginViewController *loginVC = [[LoginViewController alloc] init];
+-(id)initWithLoginViewController:(LoginViewController*) viewCotroller{
+    
+    if (self = [super init]) {
+        _loginViewController = viewCotroller;
+        _modelLogin = [[ModelLogin alloc]init];
+    }
+    
+    return self;
+}
+-(void)loginWithEmail:(NSString*) email andPassword:(NSString*) password {
+    
     if ([email length] != 0 && [password length] != 0) {
-        ModelLogin *modelLogin = [[ModelLogin alloc] init];
-        [modelLogin loginUser:email andPassword:password completion:^(BOOL success, id response, NSError *error) {
+        [_modelLogin loginUser:email andPassword:password completion:^(BOOL success, id response, NSError *error) {
             if (success)
             {
-                NSLog(@"Working");
-                
                 MainViewController *mainVC = [[MainViewController alloc] init];
-                [viewController presentViewController:mainVC animated:YES completion:nil];
+                [_loginViewController presentViewController:mainVC animated:YES completion:nil];
             }
             else
             {
-                [loginVC showAlert:@"Ошибка" withmessage:@"Данный пользователь не существует"];
+                [_loginViewController showAlert:@"Ошибка" withmessage:@"Данный пользователь не существует"];
             }
         }];
     }else {
-        [loginVC showAlert:@"Ошибка" withmessage:@"Заполните требуемые поля!"];
+        [_loginViewController showAlert:@"Ошибка" withmessage:@"Заполните требуемые поля!"];
     }
 }
 
--(void)registrationButtonClicked:(UIViewController*) viewController{
-    RegistrationViewController *registrationVC = [[RegistrationViewController alloc] initWithNibName:@"RegistrationViewController" bundle:nil];
-    [viewController presentViewController:registrationVC animated:YES completion:nil];
+-(void)registrationButtonClicked{
     
+    RegistrationViewController *registrationVC = [[RegistrationViewController alloc] initWithNibName:@"RegistrationViewController" bundle:nil];
+    [_loginViewController presentViewController:registrationVC animated:YES completion:nil];
 }
 @end

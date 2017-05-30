@@ -6,12 +6,12 @@ get '/' do
   end
 
 
-get '/email.json' do
+get '/registration' do
   content_type :json
   { :email => 'user@mail.ru'}.to_json
 end
 
-get '/default.json' do
+get '/login' do
     content_type :json
     { :email => 'Admin', :password => 'Admin' }.to_json
     

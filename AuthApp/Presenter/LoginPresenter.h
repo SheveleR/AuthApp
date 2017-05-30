@@ -8,13 +8,11 @@
 
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
-
+#import "LoginViewController.h"
 @interface LoginPresenter : NSObject
 
-@property (nonatomic, strong) NSString *login;
-@property (nonatomic, strong) NSString *password;
-
-- (void)loginButtonClicked:(UIViewController*) viewController withEmail:(NSString*) email andPassword:(NSString*) password ;
-- (void)registrationButtonClicked:(UIViewController*) viewController;
+-(id)initWithLoginViewController:(LoginViewController*) viewCotroller;
+- (void)loginWithEmail:(NSString*) email andPassword:(NSString*) password ;
+- (void)registrationButtonClicked;
 
 @end

@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "LoginPresenter.h"
+
 
 @interface ModelLogin : NSObject
 - (void) loginUser:(NSString *) userEmail andPassword:(NSString *) userPassword completion:(void(^)(BOOL success, id response, NSError *error))completion ;

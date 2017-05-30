@@ -84,7 +84,7 @@
 		DDEBD7301ED1CE75001B1E1A /* ImageFactory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageFactory.m; sourceTree = "<group>"; };
 		DDEBD7381ED1D13B001B1E1A /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
 		DDEBD7391ED1D13B001B1E1A /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
-		DDEDD2241EDC372F00AC4B24 /* AuthApp-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "AuthApp-Bridging-Header.h"; sourceTree = "<group>"; };
+		DDEDD2251EDD27C400AC4B24 /* AuthApp-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "AuthApp-Bridging-Header.h"; path = "../AuthApp-Bridging-Header.h"; sourceTree = "<group>"; };
 		F288BE6E1EFFF7669DABF38A /* Pods_AuthApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_AuthApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F599B6A8B60861AA41FBC13F /* Pods-AuthApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AuthApp.debug.xcconfig"; path = "Pods/Target Support Files/Pods-AuthApp/Pods-AuthApp.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -193,7 +193,7 @@
 		DD266BF11ECDC84B00FA91F2 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				DDEDD2241EDC372F00AC4B24 /* AuthApp-Bridging-Header.h */,
+				DDEDD2251EDD27C400AC4B24 /* AuthApp-Bridging-Header.h */,
 				DD266BF41ECDC84B00FA91F2 /* AppDelegate.h */,
 				DD266BF51ECDC84B00FA91F2 /* AppDelegate.m */,
 				DD266C021ECDC84B00FA91F2 /* Info.plist */,

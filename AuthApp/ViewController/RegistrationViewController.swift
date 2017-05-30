@@ -16,28 +16,37 @@ class RegistrationViewController: UIViewController {
     @IBOutlet weak var passwordWarning: UIImageView!
     var presenter: RegisterPresenter!;
     
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.presenter = RegisterPresenter(viewController: self);
         self.view.backgroundColor = UIColor(red:62/255.0, green:69/255.0, blue:76/255.0, alpha:1);
-        presenter = RegisterPresenter();
+        self.registrationButton.isEnabled = false
+        self.emailTextField.addTarget(self, action: #selector(textFieldChanged(_textField:)), for: .editingChanged)
+        self.passwordTextField.addTarget(self, action: #selector(textFieldChanged(_textField:)), for: .editingChanged)
     }
     
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    func textFieldChanged(_textField:UITextField) {
+        self.registrationButton.isEnabled = true
     }
-    
     @IBAction func registrationButtonClicked(_ sender: Any) {
-        if !(emailTextField.text?.isEmpty)! && !(passwordTextField.text?.isEmpty)! {
-            
-            presenter.registerButtonClicked(registrationVC: self, userEmail: emailTextField.text!, userPassword: passwordTextField.text!)
+        if let email = emailTextField.text, !email.isEmpty, let password = passwordTextField.text, !password.isEmpty {
+            passwordWarning.isHidden = true
+            emailWarning.isHidden = true
+            self.presenter.registerButtonClicked(userEmail: emailTextField.text!, userPassword: passwordTextField.text!)
         }
         else {
-            if (emailTextField.text?.isEmpty)! {
+            if let email = emailTextField.text, email.isEmpty {
                 emailWarning.isHidden = false
             }
-            if (passwordTextField.text?.isEmpty)! {
+            else {
+                emailWarning.isHidden = true
+            }
+            if let password = passwordTextField.text, password.isEmpty{
                 passwordWarning.isHidden = false
+            }
+            else {
+                passwordWarning.isHidden = true
             }
             self.showAlert(title: "Ошибка", errorMessage: "Введите корректные e-mail и пароль")
         }

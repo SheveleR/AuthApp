@@ -14,7 +14,7 @@
 - (void) loginUser:(NSString *) userEmail andPassword:(NSString *) userPassword completion:(void(^)(BOOL success, id response, NSError *error))completion {
     
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
-    [manager GET:@"http://localhost:4567/default.json" parameters:nil success:^(NSURLSessionTask *task, id responseObject) {
+    [manager GET:@"http://localhost:4567/login" parameters:nil success:^(NSURLSessionTask *task, id responseObject) {
         NSLog(@"JSON: %@", responseObject);
         if ([responseObject isKindOfClass:[NSDictionary class]] && [[responseObject objectForKey:@"email"] isEqualToString:userEmail] && [[responseObject objectForKey:@"email"] isEqualToString:userPassword])
         {

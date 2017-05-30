@@ -8,9 +8,10 @@
 
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
+#import "MainViewController.h"
 
 @interface MainPresenter : NSObject
-
-- (void)logoutButtonClicked:(UIViewController *) viewController;
+- (id)initWithMainViewController:(MainViewController*) viewCotroller;
+- (void)logoutButtonClicked;
 
 @end
